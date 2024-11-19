@@ -1,0 +1,13 @@
+pytorch-lightning==1.8.6
+torch
+tqdm
+bcolz-zipline
+prettytable
+menpo
+mxnet
+opencv-python
+numpy==1.19.5
+scikit-learn==0.24.2
+matplotlib==3.6
+torchvision
+pandas
