@@ -3,6 +3,7 @@ import bcolz
 import numpy as np
 from PIL import Image
 from tqdm import tqdm
+import argparse
 
 def read_pairs(pairs_filename):
     """
@@ -107,8 +108,14 @@ def process_image(image_path):
     return img.astype(np.float32)
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument('--lfw_dir', type=str, default='/workspace-cloud/koki.murata/AdaFace/data/val_data/lfw_funneled')
+    parser.add_argument('--pairs_txt', type=str, default='/workspace-cloud/koki.murata/AdaFace/data/val_data/lfw_funneled/pairs.txt')
+    parser.add_argument('--output_dir', type=str, default='/workspace-cloud/koki.murata/AdaFace/data/val_data')
+    args = parser.parse_args()
+    
     prepare_lfw_data(
-        lfw_dir='/workspace-cloud/koki.murata/AdaFace/data/val_data/lfw_funneled',
-        pairs_txt='/workspace-cloud/koki.murata/AdaFace/data/val_data/lfw_funneled/pairs.txt',
-        output_dir='/workspace-cloud/koki.murata/AdaFace/data/val_data'
+        lfw_dir=args.lfw_dir,
+        pairs_txt=args.pairs_txt,
+        output_dir=args.output_dir
     )

@@ -1,8 +1,5 @@
-DATAROOT=data
-
 python main.py \
-    --data_root ${DATAROOT} \
-    --train_data_path faces_emore/imgs \
+    --data_root data \
     --val_data_path val_data \
     --prefix adaface_ir50_ms1mv2 \
     --gpus 1 \

@@ -12,4 +12,6 @@ scripts/run_debug*
 assets/
 .git/
 data/val_data/*
-
+.env/
+face_alignment/
+validation_mixed/
