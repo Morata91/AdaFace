@@ -61,10 +61,10 @@ class DataModule(pl.LightningDataModule):
 
     def prepare_data(self):
         # LFWのmemfileが存在しない場合のみ作成
-        lfw_memfile_path = os.path.join(self.data_root, self.val_data_path, 'lfw', 'memfile')
+        lfw_memfile_path = os.path.join(self.data_root, self.val_data_path, 'memfile')
         if not os.path.isdir(lfw_memfile_path):
             print('Making LFW validation data memfile')
-            evaluate_utils.get_val_pair(os.path.join(self.data_root, self.val_data_path), 'lfw')
+            evaluate_utils.get_val_pair(os.path.join(self.data_root, self.val_data_path))
 
     def setup(self, stage=None):
         if stage == 'fit' or stage is None:
@@ -91,7 +91,7 @@ class DataModule(pl.LightningDataModule):
             self.val_dataset = LFWDataset((lfw, lfw_issame))
 
         if stage == 'test' or stage is None:
-            lfw, lfw_issame = evaluate_utils.get_val_pair(os.path.join(self.data_root, self.val_data_path), 'lfw')
+            lfw, lfw_issame = evaluate_utils.get_val_pair(os.path.join(self.data_root, self.val_data_path))
             self.test_dataset = LFWDataset((lfw, lfw_issame))
 
     def train_dataloader(self):

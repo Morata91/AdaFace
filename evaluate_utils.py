@@ -16,24 +16,24 @@ def get_val_data(data_path):
     calfw, calfw_issame = get_val_pair(data_path, 'calfw')
     return agedb_30, cfp_fp, lfw, agedb_30_issame, cfp_fp_issame, lfw_issame, cplfw, cplfw_issame, calfw, calfw_issame
 
-def get_val_pair(path, name, use_memfile=True):
+def get_val_pair(path, use_memfile=True):
     if use_memfile:
-        mem_file_dir = os.path.join(path, name, 'memfile')
+        mem_file_dir = os.path.join(path, 'memfile')
         mem_file_name = os.path.join(mem_file_dir, 'mem_file.dat')
         if os.path.isdir(mem_file_dir):
             print('laoding validation data memfile')
             np_array = read_memmap(mem_file_name)
         else:
             os.makedirs(mem_file_dir)
-            carray = bcolz.carray(rootdir = os.path.join(path, name), mode='r')
+            carray = bcolz.carray(rootdir = path, mode='r')
             np_array = np.array(carray)
             mem_array = make_memmap(mem_file_name, np_array)
             del np_array, mem_array 
             np_array = read_memmap(mem_file_name)
     else:
-        np_array = bcolz.carray(rootdir = os.path.join(path, name), mode='r')
+        np_array = bcolz.carray(rootdir = path, mode='r')
 
-    issame = np.load(os.path.join(path, '{}_list.npy'.format(name)))
+    issame = np.load(os.path.join(path, 'lfw_list.npy'))
     return np_array, issame
 
 
