@@ -20,7 +20,7 @@ def read_pairs(pairs_filename):
     
     with open(pairs_filename, 'r') as f:
         # 最初の行はペアの数とフォールドの数
-        n_pairs, n_folds = map(int, f.readline().strip().split())
+        a = f.readline()
         
         # 各行を読み込む
         for line in f:
